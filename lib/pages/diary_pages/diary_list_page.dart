@@ -33,7 +33,7 @@ class _DiaryListPageState extends State<DiaryListPage> {
       //voglio aggiungere le mie pagine hardcodate nel db
       _isar.writeTxnSync(() => _isar.diaryPages.putAllSync(diaryPages));
     } else {
-      _isar.writeTxnSync(() => _isar.diaryPages.where().deleteAllSync());
+      //_isar.writeTxnSync(() => _isar.diaryPages.where().deleteAllSync());
     }
   }
 
@@ -54,8 +54,11 @@ class _DiaryListPageState extends State<DiaryListPage> {
             return ListTile(
               title: Text('${_pages[index].dateTime.day}/${_pages[index].dateTime.month}/${_pages[index].dateTime.year}'/*diaryPages[index].dateTime.toString()*/),
               subtitle: Text(_pages[index].content),
-              onTap: (){
-                context.router.push(DiaryDetailRoute(page: _pages[index]));
+              onTap: () async{
+                final popped = await context.router.push(DiaryDetailRoute(page: _pages[index]));
+                if(popped!=null){
+                  print(true);
+                }
               },
             );
           },
