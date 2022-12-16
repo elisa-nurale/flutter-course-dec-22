@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                     final pw = await storage.read(key: _userController.text);
                     if(_passwordController.text == pw){
                       await storage.write(key: 'loggedIn', value: _userController.text);
-                      context.router.push(const DiaryDetailRoute());
+                      context.router.push(DiaryListRoute());
                     }
                     else{
                       showDialog(context: context, builder: (context){
