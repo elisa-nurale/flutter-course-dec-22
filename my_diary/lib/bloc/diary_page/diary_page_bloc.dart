@@ -1,10 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_course_dec_22/models/diary_page.dart';
 import 'package:isar/isar.dart';
+import 'package:injectable/injectable.dart';
 
 import 'diary_page_event.dart';
 import 'diary_page_state.dart';
 
+@injectable
 class DiaryPageBloc extends Bloc<DiaryPageEvent, DiaryPageState>{
   DiaryPageBloc() : super(const DiaryPageState.initial()) {
     on<DiaryPageLoaded>(_onDiaryPageLoaded);

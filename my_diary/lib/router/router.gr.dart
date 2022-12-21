@@ -11,45 +11,52 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i4;
-import 'package:flutter/material.dart' as _i5;
+import 'package:auto_route/auto_route.dart' as _i5;
+import 'package:flutter/material.dart' as _i6;
 
-import '../models/diary_page.dart' as _i7;
-import '../pages/diary_pages/diary_detail_page.dart' as _i3;
-import '../pages/diary_pages/diary_list_page.dart' as _i2;
+import '../models/diary_page.dart' as _i8;
+import '../pages/diary_pages/diary_detail_page.dart' as _i4;
+import '../pages/diary_pages/diary_list_page.dart' as _i3;
+import '../pages/diary_pages/diary_pages_wrapper.dart' as _i2;
 import '../pages/login/login_page.dart' as _i1;
-import 'router_guard.dart' as _i6;
+import 'router_guard.dart' as _i7;
 
-class AppRouter extends _i4.RootStackRouter {
+class AppRouter extends _i5.RootStackRouter {
   AppRouter({
-    _i5.GlobalKey<_i5.NavigatorState>? navigatorKey,
+    _i6.GlobalKey<_i6.NavigatorState>? navigatorKey,
     required this.authGuard,
   }) : super(navigatorKey);
 
-  final _i6.AuthGuard authGuard;
+  final _i7.AuthGuard authGuard;
 
   @override
-  final Map<String, _i4.PageFactory> pagesMap = {
+  final Map<String, _i5.PageFactory> pagesMap = {
     LoginRoute.name: (routeData) {
-      return _i4.MaterialPageX<dynamic>(
+      return _i5.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i1.LoginPage(),
+      );
+    },
+    DiaryPagesWrapper.name: (routeData) {
+      return _i5.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i2.DiaryPagesWrapper(),
       );
     },
     DiaryListRoute.name: (routeData) {
       final args = routeData.argsAs<DiaryListRouteArgs>(
           orElse: () => const DiaryListRouteArgs());
-      return _i4.MaterialPageX<dynamic>(
+      return _i5.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i2.DiaryListPage(key: args.key),
+        child: _i3.DiaryListPage(key: args.key),
       );
     },
     DiaryDetailRoute.name: (routeData) {
       final args = routeData.argsAs<DiaryDetailRouteArgs>(
           orElse: () => const DiaryDetailRouteArgs());
-      return _i4.MaterialPageX<dynamic>(
+      return _i5.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i3.DiaryDetailPage(
+        child: _i4.DiaryDetailPage(
           page: args.page,
           key: args.key,
         ),
@@ -58,27 +65,35 @@ class AppRouter extends _i4.RootStackRouter {
   };
 
   @override
-  List<_i4.RouteConfig> get routes => [
-        _i4.RouteConfig(
+  List<_i5.RouteConfig> get routes => [
+        _i5.RouteConfig(
           LoginRoute.name,
           path: '/',
         ),
-        _i4.RouteConfig(
-          DiaryListRoute.name,
-          path: '/diary-list-page',
-          guards: [authGuard],
-        ),
-        _i4.RouteConfig(
-          DiaryDetailRoute.name,
-          path: '/diary-detail-page',
-          guards: [authGuard],
+        _i5.RouteConfig(
+          DiaryPagesWrapper.name,
+          path: 'diary-pages-wrapper',
+          children: [
+            _i5.RouteConfig(
+              DiaryListRoute.name,
+              path: '',
+              parent: DiaryPagesWrapper.name,
+              guards: [authGuard],
+            ),
+            _i5.RouteConfig(
+              DiaryDetailRoute.name,
+              path: 'detail',
+              parent: DiaryPagesWrapper.name,
+              guards: [authGuard],
+            ),
+          ],
         ),
       ];
 }
 
 /// generated route for
 /// [_i1.LoginPage]
-class LoginRoute extends _i4.PageRouteInfo<void> {
+class LoginRoute extends _i5.PageRouteInfo<void> {
   const LoginRoute()
       : super(
           LoginRoute.name,
@@ -89,12 +104,25 @@ class LoginRoute extends _i4.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i2.DiaryListPage]
-class DiaryListRoute extends _i4.PageRouteInfo<DiaryListRouteArgs> {
-  DiaryListRoute({_i5.Key? key})
+/// [_i2.DiaryPagesWrapper]
+class DiaryPagesWrapper extends _i5.PageRouteInfo<void> {
+  const DiaryPagesWrapper({List<_i5.PageRouteInfo>? children})
+      : super(
+          DiaryPagesWrapper.name,
+          path: 'diary-pages-wrapper',
+          initialChildren: children,
+        );
+
+  static const String name = 'DiaryPagesWrapper';
+}
+
+/// generated route for
+/// [_i3.DiaryListPage]
+class DiaryListRoute extends _i5.PageRouteInfo<DiaryListRouteArgs> {
+  DiaryListRoute({_i6.Key? key})
       : super(
           DiaryListRoute.name,
-          path: '/diary-list-page',
+          path: '',
           args: DiaryListRouteArgs(key: key),
         );
 
@@ -104,7 +132,7 @@ class DiaryListRoute extends _i4.PageRouteInfo<DiaryListRouteArgs> {
 class DiaryListRouteArgs {
   const DiaryListRouteArgs({this.key});
 
-  final _i5.Key? key;
+  final _i6.Key? key;
 
   @override
   String toString() {
@@ -113,14 +141,14 @@ class DiaryListRouteArgs {
 }
 
 /// generated route for
-/// [_i3.DiaryDetailPage]
-class DiaryDetailRoute extends _i4.PageRouteInfo<DiaryDetailRouteArgs> {
+/// [_i4.DiaryDetailPage]
+class DiaryDetailRoute extends _i5.PageRouteInfo<DiaryDetailRouteArgs> {
   DiaryDetailRoute({
-    _i7.DiaryPage? page,
-    _i5.Key? key,
+    _i8.DiaryPage? page,
+    _i6.Key? key,
   }) : super(
           DiaryDetailRoute.name,
-          path: '/diary-detail-page',
+          path: 'detail',
           args: DiaryDetailRouteArgs(
             page: page,
             key: key,
@@ -136,9 +164,9 @@ class DiaryDetailRouteArgs {
     this.key,
   });
 
-  final _i7.DiaryPage? page;
+  final _i8.DiaryPage? page;
 
-  final _i5.Key? key;
+  final _i6.Key? key;
 
   @override
   String toString() {

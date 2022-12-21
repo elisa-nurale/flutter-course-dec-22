@@ -3,7 +3,9 @@ import 'package:flutter_course_dec_22/models/diary_page.dart';
 import 'package:isar/isar.dart';
 import 'diary_state.dart';
 import 'diary_event.dart';
+import 'package:injectable/injectable.dart';
 
+@injectable
 class DiaryBloc extends Bloc<DiaryEvent, DiaryState> {
   DiaryBloc() : super(const DiaryState.notLoaded()){
     on<DiaryPagesLoaded>(_onDiaryPagesLoaded);

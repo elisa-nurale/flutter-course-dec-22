@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_course_dec_22/globals/globals.dart';
 import 'package:flutter_course_dec_22/router/router.gr.dart';
 
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -49,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
                     final pw = await storage.read(key: _userController.text);
                     if(_passwordController.text == pw){
                       await storage.write(key: 'loggedIn', value: _userController.text);
-                      context.router.push(DiaryListRoute());
+                      context.router.push(const DiaryPagesWrapper());
                     }
                     else{
                       showDialog(context: context, builder: (context){
