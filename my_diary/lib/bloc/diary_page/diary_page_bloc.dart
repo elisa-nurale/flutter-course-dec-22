@@ -1,4 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_course_dec_22/models/diary_page.dart';
+import 'package:isar/isar.dart';
 
 import 'diary_page_event.dart';
 import 'diary_page_state.dart';
@@ -17,6 +19,24 @@ class DiaryPageBloc extends Bloc<DiaryPageEvent, DiaryPageState>{
     } else {
       emit(DiaryPageState.reading(page: event.page!));
     }
+  }
+
+  Future<void> _onDiaryPageViewed(DiaryPageViewed event, Emitter<DiaryPageState> emit) async{
+    emit(DiaryPageState.reading(page: event.page));
+  }
+
+  Future<void> _onDiaryPageEdited(DiaryPageEdited event, Emitter<DiaryPageState> emit) async{
+    emit(DiaryPageState.editing(page: event.page));
+  }
+
+  Future<void> _onDiaryPageSaved(DiaryPageSaved event, Emitter<DiaryPageState> emit) async{
+    final Isar? _isar = Isar.getInstance();
+
+    if(_isar == null){
+      return emit(const DiaryPageState.error());
+    }
+
+    await _isar.writeTxn(() => _isar.diaryPages.put(event.page));
   }
 
 }

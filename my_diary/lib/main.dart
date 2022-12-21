@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_course_dec_22/bloc/simple_bloc_observer.dart';
 import 'package:flutter_course_dec_22/router/router.gr.dart';
 import 'package:flutter_course_dec_22/router/router_guard.dart';
 
 void main() {
+  Bloc.observer = SimpleBlocObserver();
   runApp(MyDiary());
 }
 
