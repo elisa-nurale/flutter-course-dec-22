@@ -19,6 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
+        minimum: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -36,28 +37,34 @@ class _LoginPageState extends State<LoginPage> {
               ),
               obscureText: true,
             ),
+            const SizedBox(height: 16),
             Row(
               children: [
-                TextButton(
-                  child: const Text('Crea utente'),
-                  onPressed: () async {
-                    await storage.write(key: _userController.text, value: _passwordController.text);
-                  },
+                Expanded(
+                  child: OutlinedButton(
+                    child: const Text('Crea utente'),
+                    onPressed: () async {
+                      await storage.write(key: _userController.text, value: _passwordController.text);
+                    },
+                  ),
                 ),
-                TextButton(
-                  child: const Text('Login'),
-                  onPressed: () async {
-                    final pw = await storage.read(key: _userController.text);
-                    if(_passwordController.text == pw){
-                      await storage.write(key: 'loggedIn', value: _userController.text);
-                      context.router.push(const DiaryPagesWrapper());
-                    }
-                    else{
-                      showDialog(context: context, builder: (context){
-                        return const AlertDialog(content: Text('Username o password errati'),);
-                      });
-                    }
-                  },
+                const SizedBox(width: 16,),
+                Expanded(
+                  child: ElevatedButton(
+                    child: const Text('Login'),
+                    onPressed: () async {
+                      final pw = await storage.read(key: _userController.text);
+                      if(_passwordController.text == pw){
+                        await storage.write(key: 'loggedIn', value: _userController.text);
+                        context.router.push(const DiaryPagesWrapper());
+                      }
+                      else{
+                        showDialog(context: context, builder: (context){
+                          return const AlertDialog(content: Text('Username o password errati'),);
+                        });
+                      }
+                    },
+                  ),
                 )
               ],
             ),

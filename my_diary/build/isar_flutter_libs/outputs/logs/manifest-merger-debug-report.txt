@@ -33,6 +33,12 @@ uses-sdk
 INJECTED from /Users/elisa/flutter/.pub-cache/hosted/pub.dartlang.org/isar_flutter_libs-3.0.5/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/elisa/flutter/.pub-cache/hosted/pub.dartlang.org/isar_flutter_libs-3.0.5/android/src/main/AndroidManifest.xml
 INJECTED from /Users/elisa/flutter/.pub-cache/hosted/pub.dartlang.org/isar_flutter_libs-3.0.5/android/src/main/AndroidManifest.xml
+INJECTED from /Users/elisa/flutter/.pub-cache/hosted/pub.dartlang.org/isar_flutter_libs-3.0.5/android/src/main/AndroidManifest.xml
+INJECTED from /Users/elisa/flutter/.pub-cache/hosted/pub.dartlang.org/isar_flutter_libs-3.0.5/android/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/elisa/flutter/.pub-cache/hosted/pub.dartlang.org/isar_flutter_libs-3.0.5/android/src/main/AndroidManifest.xml
+		ADDED from /Users/elisa/flutter/.pub-cache/hosted/pub.dartlang.org/isar_flutter_libs-3.0.5/android/src/main/AndroidManifest.xml
+		INJECTED from /Users/elisa/flutter/.pub-cache/hosted/pub.dartlang.org/isar_flutter_libs-3.0.5/android/src/main/AndroidManifest.xml
 	android:minSdkVersion
 		INJECTED from /Users/elisa/flutter/.pub-cache/hosted/pub.dartlang.org/isar_flutter_libs-3.0.5/android/src/main/AndroidManifest.xml
 		ADDED from /Users/elisa/flutter/.pub-cache/hosted/pub.dartlang.org/isar_flutter_libs-3.0.5/android/src/main/AndroidManifest.xml

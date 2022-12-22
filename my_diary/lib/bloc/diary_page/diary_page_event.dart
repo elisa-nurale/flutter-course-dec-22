@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_course_dec_22/models/diary_page.dart';
 
@@ -35,6 +37,14 @@ class DiaryPageEdited extends DiaryPageEvent{
 class DiaryPageSaved extends DiaryPageEvent{
   final DiaryPage page;
   const DiaryPageSaved({required this.page});
+
+  @override
+  List<Object?> get props => [page];
+}
+
+class DiaryPageImageAdded extends DiaryPageEvent{
+  final DiaryPage page;
+  const DiaryPageImageAdded({required this.page});
 
   @override
   List<Object?> get props => [page];

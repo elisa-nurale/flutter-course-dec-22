@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="dev.isar.isar_flutter_libs" >
 
-    <uses-sdk android:minSdkVersion="16" />
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="16" />
 
     <application>
         <provider
