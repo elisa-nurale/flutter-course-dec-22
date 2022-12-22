@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "172328463003",
+    "firebase_url": "https://diary-dec-22-default-rtdb.firebaseio.com",
+    "project_id": "diary-dec-22",
+    "storage_bucket": "diary-dec-22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172328463003:android:dcca3fe88858efd1b5743e",
+        "android_client_info": {
+          "package_name": "com.example.flutter_course_dec_22"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "172328463003-1c0c7por2juluj4e2nvepg2c70fs4th5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYlJuDqSemVlNXznvObHcgG22tJ0gWWQg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "172328463003-1c0c7por2juluj4e2nvepg2c70fs4th5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "172328463003-doouo9fuuvfvsn0g78509hligr4glr48.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterCourseDec22"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
