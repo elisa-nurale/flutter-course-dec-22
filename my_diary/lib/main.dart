@@ -27,7 +27,7 @@ class MyDiary extends StatelessWidget {
     return MaterialApp.router(
       title: 'My Diary',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepPurple,
       ),
       routerDelegate: _appRouter.delegate(),
       routeInformationParser: _appRouter.defaultRouteParser(),
