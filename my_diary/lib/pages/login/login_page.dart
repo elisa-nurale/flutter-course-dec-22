@@ -1,7 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_course_dec_22/bloc/auth/auth_event.dart';
 import 'package:flutter_course_dec_22/globals/globals.dart';
 import 'package:flutter_course_dec_22/router/router.gr.dart';
+
+import '../../bloc/auth/auth_bloc.dart';
+import '../../bloc/auth/auth_state.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -17,7 +22,20 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocListener<AuthBloc, AuthState>(
+  listener: (context, authState) {
+        print('sono nel listener di login page');
+    if(authState.status == AuthStatus.auth) {
+          context.router.push(const DiaryPagesWrapper());
+        }
+    if(authState.status == AuthStatus.error){
+      showDialog(context: context, builder: (context) => AlertDialog(
+        title: const Text('Errore'),
+        content: Text(authState.error!),
+      ));
+    }
+      },
+  child: Scaffold(
       body: SafeArea(
         minimum: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         child: Column(
@@ -44,7 +62,8 @@ class _LoginPageState extends State<LoginPage> {
                   child: OutlinedButton(
                     child: const Text('Crea utente'),
                     onPressed: () async {
-                      await storage.write(key: _userController.text, value: _passwordController.text);
+                      context.read<AuthBloc>().add(NewAccountCreated(email: _userController.text, password: _passwordController.text));
+                     // await storage.write(key: _userController.text, value: _passwordController.text);
                     },
                   ),
                 ),
@@ -53,7 +72,8 @@ class _LoginPageState extends State<LoginPage> {
                   child: ElevatedButton(
                     child: const Text('Login'),
                     onPressed: () async {
-                      final pw = await storage.read(key: _userController.text);
+                      context.read<AuthBloc>().add(LoggedIn(email: _userController.text, password: _passwordController.text));
+                      /*final pw = await storage.read(key: _userController.text);
                       if(_passwordController.text == pw){
                         await storage.write(key: 'loggedIn', value: _userController.text);
                         context.router.push(const DiaryPagesWrapper());
@@ -62,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                         showDialog(context: context, builder: (context){
                           return const AlertDialog(content: Text('Username o password errati'),);
                         });
-                      }
+                      }*/
                     },
                   ),
                 )
@@ -70,6 +90,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
         ],),
       ),
-    );
+    ),
+);
   }
 }

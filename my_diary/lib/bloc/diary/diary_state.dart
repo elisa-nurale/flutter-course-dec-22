@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import '../../models/diary_page.dart';
 
-enum DiaryStatus {notLoaded, loading, loaded}
+enum DiaryStatus {initialized, loading, loaded}
 
 class DiaryState extends Equatable {
   final DiaryStatus status;
@@ -13,7 +13,7 @@ class DiaryState extends Equatable {
   @override
   List<Object?> get props => [status, pages];
 
-  const DiaryState.notLoaded() : this._(status: DiaryStatus.notLoaded);
+  const DiaryState.notLoaded() : this._(status: DiaryStatus.initialized);
 
   const DiaryState.loading() : this._(status: DiaryStatus.loading);
 
