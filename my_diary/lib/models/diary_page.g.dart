@@ -26,6 +26,11 @@ const DiaryPageSchema = CollectionSchema(
       id: 1,
       name: r'dateTime',
       type: IsarType.dateTime,
+    ),
+    r'images': PropertySchema(
+      id: 2,
+      name: r'images',
+      type: IsarType.stringList,
     )
   },
   estimateSize: _diaryPageEstimateSize,
@@ -49,6 +54,18 @@ int _diaryPageEstimateSize(
 ) {
   var bytesCount = offsets.last;
   bytesCount += 3 + object.content.length * 3;
+  {
+    final list = object.images;
+    if (list != null) {
+      bytesCount += 3 + list.length * 3;
+      {
+        for (var i = 0; i < list.length; i++) {
+          final value = list[i];
+          bytesCount += value.length * 3;
+        }
+      }
+    }
+  }
   return bytesCount;
 }
 
@@ -60,6 +77,7 @@ void _diaryPageSerialize(
 ) {
   writer.writeString(offsets[0], object.content);
   writer.writeDateTime(offsets[1], object.dateTime);
+  writer.writeStringList(offsets[2], object.images);
 }
 
 DiaryPage _diaryPageDeserialize(
@@ -71,6 +89,7 @@ DiaryPage _diaryPageDeserialize(
   final object = DiaryPage(
     content: reader.readString(offsets[0]),
     dateTime: reader.readDateTime(offsets[1]),
+    images: reader.readStringList(offsets[2]),
   );
   object.id = id;
   return object;
@@ -87,6 +106,8 @@ P _diaryPageDeserializeProp<P>(
       return (reader.readString(offset)) as P;
     case 1:
       return (reader.readDateTime(offset)) as P;
+    case 2:
+      return (reader.readStringList(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -419,6 +440,244 @@ extension DiaryPageQueryFilter
       ));
     });
   }
+
+  QueryBuilder<DiaryPage, DiaryPage, QAfterFilterCondition> imagesIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'images',
+      ));
+    });
+  }
+
+  QueryBuilder<DiaryPage, DiaryPage, QAfterFilterCondition> imagesIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'images',
+      ));
+    });
+  }
+
+  QueryBuilder<DiaryPage, DiaryPage, QAfterFilterCondition>
+      imagesElementEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'images',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiaryPage, DiaryPage, QAfterFilterCondition>
+      imagesElementGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'images',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiaryPage, DiaryPage, QAfterFilterCondition>
+      imagesElementLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'images',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiaryPage, DiaryPage, QAfterFilterCondition>
+      imagesElementBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'images',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiaryPage, DiaryPage, QAfterFilterCondition>
+      imagesElementStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'images',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiaryPage, DiaryPage, QAfterFilterCondition>
+      imagesElementEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'images',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiaryPage, DiaryPage, QAfterFilterCondition>
+      imagesElementContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'images',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiaryPage, DiaryPage, QAfterFilterCondition>
+      imagesElementMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'images',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DiaryPage, DiaryPage, QAfterFilterCondition>
+      imagesElementIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'images',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<DiaryPage, DiaryPage, QAfterFilterCondition>
+      imagesElementIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'images',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<DiaryPage, DiaryPage, QAfterFilterCondition> imagesLengthEqualTo(
+      int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'images',
+        length,
+        true,
+        length,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<DiaryPage, DiaryPage, QAfterFilterCondition> imagesIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'images',
+        0,
+        true,
+        0,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<DiaryPage, DiaryPage, QAfterFilterCondition> imagesIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'images',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<DiaryPage, DiaryPage, QAfterFilterCondition>
+      imagesLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'images',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<DiaryPage, DiaryPage, QAfterFilterCondition>
+      imagesLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'images',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<DiaryPage, DiaryPage, QAfterFilterCondition> imagesLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'images',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
+    });
+  }
 }
 
 extension DiaryPageQueryObject
@@ -506,6 +765,12 @@ extension DiaryPageQueryWhereDistinct
       return query.addDistinctBy(r'dateTime');
     });
   }
+
+  QueryBuilder<DiaryPage, DiaryPage, QDistinct> distinctByImages() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'images');
+    });
+  }
 }
 
 extension DiaryPageQueryProperty
@@ -525,6 +790,12 @@ extension DiaryPageQueryProperty
   QueryBuilder<DiaryPage, DateTime, QQueryOperations> dateTimeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'dateTime');
+    });
+  }
+
+  QueryBuilder<DiaryPage, List<String>?, QQueryOperations> imagesProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'images');
     });
   }
 }

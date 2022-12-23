@@ -17,12 +17,10 @@ void main() async{
 class MyDiary extends StatelessWidget {
   MyDiary({Key? key}) : super(key: key);
 
-  final _appRouter = AppRouter(authGuard: AuthGuard());
+  final _appRouter = AppRouter(/*authGuard: AuthGuard()*/);
 
   @override
   Widget build(BuildContext context) {
-
-    print(Firebase.app().name);
 
     return MaterialApp.router(
       title: 'My Diary',
