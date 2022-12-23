@@ -2,11 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_course_dec_22/bloc/auth/auth_event.dart';
-import 'package:flutter_course_dec_22/globals/globals.dart';
 import 'package:flutter_course_dec_22/router/router.gr.dart';
 
 import '../../bloc/auth/auth_bloc.dart';
 import '../../bloc/auth/auth_state.dart';
+import '../../bloc/notification/notification_bloc.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -22,9 +22,9 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    context.read<NotificationBloc>().state;
     return BlocListener<AuthBloc, AuthState>(
   listener: (context, authState) {
-        print('sono nel listener di login page');
     if(authState.status == AuthStatus.auth) {
           context.router.push(const DiaryPagesWrapper());
         }
