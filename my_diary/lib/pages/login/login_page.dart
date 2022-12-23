@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_course_dec_22/bloc/auth/auth_event.dart';
+import 'package:flutter_course_dec_22/bloc/notification/notification_bloc.dart';
 import 'package:flutter_course_dec_22/router/router.gr.dart';
 
 import '../../bloc/auth/auth_bloc.dart';
@@ -20,6 +21,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    context.read<NotificationBloc>().state;
+
     return Scaffold(
       body: BlocConsumer<AuthBloc, AuthState>(
         listenWhen: (previuousAuthState, currentAuthState){
